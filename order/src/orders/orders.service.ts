@@ -19,13 +19,19 @@ export class OrdersService {
   }
 
   async create(createOrderDto: CreateOrderDto): Promise<Order> {
-    const food1 = new Food
-    food1.id = 1
+    const foods: Food[] = []
+    for (let i = 0; i < createOrderDto.foods.length; i++) {
+      const e = createOrderDto.foods[i];
+      const f = new Food
+      f.id = e
+
+      foods.push(f)
+    }
 
     const order = new Order
     order.name = createOrderDto.name
     order.custEmail = createOrderDto.custEmail
-    order.foods = [food1]
+    order.foods = foods
 
     this.ordersRepository.save(order)
     return order;
