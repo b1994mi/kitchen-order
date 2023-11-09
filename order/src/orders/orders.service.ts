@@ -4,7 +4,7 @@ import { ClientProxy } from '@nestjs/microservices';
 import { Repository } from 'typeorm';
 import { Order } from './order.entity';
 import { CreateOrderDto } from './order.dto';
-import { Food } from 'src/foods/food.entity';
+import { Food } from '../foods/food.entity';
 
 @Injectable()
 export class OrdersService {
