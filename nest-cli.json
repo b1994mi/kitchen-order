@@ -2,6 +2,8 @@
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
   "sourceRoot": "order/src",
+  "monorepo": true,
+  "root": "order",
   "compilerOptions": {
     "deleteOutDir": true
   },
@@ -13,6 +15,15 @@
       "sourceRoot": "order/src",
       "compilerOptions": {
         "tsConfigPath": "order/tsconfig.app.json"
+      }
+    },
+    "kitchen": {
+      "type": "application",
+      "root": "kitchen",
+      "entryFile": "main",
+      "sourceRoot": "kitchen/src",
+      "compilerOptions": {
+        "tsConfigPath": "kitchen/tsconfig.app.json"
       }
     }
   }
