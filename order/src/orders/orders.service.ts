@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ClientProxy } from '@nestjs/microservices';
 import { Repository } from 'typeorm';
 import { Order } from './order.entity';
 import { CreateOrderDto } from './order.dto';
@@ -10,6 +11,7 @@ export class OrdersService {
   constructor(
     @InjectRepository(Order)
     private ordersRepository: Repository<Order>,
+    @Inject('MATH_SERVICE') private rrqKaliClient: ClientProxy,
   ) { }
 
   async findOne(id: number): Promise<Order> {
@@ -34,6 +36,8 @@ export class OrdersService {
     order.foods = foods
 
     this.ordersRepository.save(order)
+
+    this.rrqKaliClient.emit('order.process', order)
     return order;
   }
 }
